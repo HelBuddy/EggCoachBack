@@ -9,25 +9,34 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
+ext {
+    lombokVersion = '1.18.30'
+}
+
 allprojects {
     group = 'com.eggcoach'
-    version = '0.0.1-SNAPSHOT'
+    version = '0.0.1'
     repositories {
         mavenCentral()
     }
 }
 
+springBoot {
+    mainClass = 'com.eggcoach.api.ApiApplication'
+}
+
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
 
-    sourceCompatibility = '21'
+    sourceCompatibility = 21
+    targetCompatibility = 21
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
+        implementation 'org.springframework.boot:spring-boot-starter-web:3.2.3'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test:3.2.3'
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     }
 
     test {

@@ -1,5 +1,6 @@
 package com.eggcoach.core.security.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -35,6 +36,7 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http,
+		@Qualifier("corsConfigurationSource")
 		CorsConfigurationSource corsConfigurationSource,
 		CustomUsernamePasswordAuthenticationFilter customUsernamePasswordAuthenticationFilter,
 		SessionRegistry sessionRegistry) throws Exception {
