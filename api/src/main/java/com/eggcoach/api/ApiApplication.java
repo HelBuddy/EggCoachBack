@@ -1,0 +1,29 @@
+package com.eggcoach.api;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@SpringBootApplication(scanBasePackages = {
+	"com.eggcoach.api",
+	"com.eggcoach.core.security",
+	"com.eggcoach.core.domain",
+	"com.eggcoach.infrastructure"
+})
+
+@EntityScan(basePackages = {
+	"com.eggcoach.infrastructure.account",  // Entity 클래스가 있는 패키지
+	"com.eggcoach.infrastructure.security"  // 다른 Entity 패키지들
+})
+
+@EnableJpaRepositories(
+	basePackages = "com.eggcoach.infrastructure.account"
+)  // 리포지토리 위치 지정
+public class ApiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ApiApplication.class, args);
+	}
+
+}

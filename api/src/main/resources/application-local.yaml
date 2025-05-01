@@ -1,0 +1,66 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 30m      # 서버측 세션 설정
+      cookie:
+        name: SESSION
+        http-only: true # JavaScript에서 쿠키 접근 방지
+        secure: true    # HTTPS에서만 쿠키 전송
+        same-site: Lax  # CSRF 방어
+        max-age: 1800   # 브라우저에서 쿠키 유효 설정
+
+spring:
+  application:
+    name: eggcoach-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/eggcoach?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USERNAME}  # ???? ?? ??
+    password: ${MYSQL_PASSWORD}  # ???? ?? ??
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:  # ??? ? ??
+      maximum-pool-size: 10  # ?? ??? ??
+      minimum-idle: 5  # ?? ?? ??? ??
+      idle-timeout: 300000  # ??? ?? ?? ?? (5?)
+      connection-timeout: 20000  # ??? ???? (20?)
+      max-lifetime: 1200000  # ??? ?? ?? (20?)
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: create  # create, create-drop, update, validate, none
+    properties:
+      hibernate:
+        ddl-auto: create
+        format_sql: true  # SQL ??? ??
+        show_sql: true    # SQL ??
+        use_sql_comments: true  # SQL ??? ??
+        default_batch_fetch_size: 100  # N+1 ?? ??? ?? ?? ??
+        jdbc:
+          time_zone: Asia/Seoul  # ??? ??
+        dialect: org.hibernate.dialect.MySQLDialect
+    open-in-view: false  # OSIV ?? ????
+
+  # ?? ??? ??
+  data:
+    web:
+      pageable:
+        default-page-size: 20
+        max-page-size: 2000
+
+logging:
+  level:
+    org.hibernate.SQL: debug  # SQL ?? ??
+    org.hibernate.type.descriptor.sql.BasicBinder: trace  # SQL ????? ???? ??
+    com.zaxxer.hikari.HikariConfig: debug
+    com.zaxxer.hikari: trace
+    org.springframework.security: DEBUG
+    com.eggcoach.core.security: DEBUG
+    org.springframework.web: DEBUG
+
+springdoc:
+#  api-docs:
+#    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html

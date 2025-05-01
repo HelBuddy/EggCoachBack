@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: ${PROFILE}
+  config:
+    import:
+      - classpath:/security-${spring.profiles.active}.yaml
