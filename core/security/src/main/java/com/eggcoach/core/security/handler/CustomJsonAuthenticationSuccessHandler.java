@@ -40,11 +40,14 @@ public class CustomJsonAuthenticationSuccessHandler implements AuthenticationSuc
 		CustomAuthConverter.from(authentication).setSecurityContext(token);
 		CustomAuthConverter.from(authentication).setSessionAttribute(request);
 
-		response.setContentType("application/json;charset=UTF-8");
-		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(
-			JsonResponse.of(String.valueOf(HttpServletResponse.SC_OK), AccountSuccessCode.LOGIN_SUCCESS_CODE.getMessage()));
-		response.getWriter().write(json);
-		response.flushBuffer();
+		// response.setContentType("application/json;charset=UTF-8");
+		// ObjectMapper objectMapper = new ObjectMapper();
+		// String json = objectMapper.writeValueAsString(
+		// 	JsonResponse.of(String.valueOf(HttpServletResponse.SC_OK), AccountSuccessCode.LOGIN_SUCCESS_CODE.getMessage()));
+		// response.getWriter().write(json);
+		// response.flushBuffer();
+
+		response.sendRedirect("http://localhost:3000");
+
 	}
 }
