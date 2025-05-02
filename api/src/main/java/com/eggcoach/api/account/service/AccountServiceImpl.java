@@ -5,9 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.eggcoach.core.common.account.AccountErrorCode;
 import com.eggcoach.core.common.account.AccountSuccessCode;
-import com.eggcoach.core.common.response.JsonResponse;
 import com.eggcoach.core.common.response.ResultCode;
-import com.eggcoach.core.domain.account.dto.SignUpDTO;
+import com.eggcoach.core.domain.account.dto.SignUpDto;
 import com.eggcoach.core.domain.account.service.UserService;
 import com.eggcoach.core.domain.security.adapter.UserServicePort;
 
@@ -22,7 +21,7 @@ public class AccountServiceImpl implements AccountService {
 	private final UserServicePort userServicePort;
 
 	@Override
-	public ResultCode signUp(SignUpDTO signUpDTO) {
+	public ResultCode signUp(SignUpDto signUpDTO) {
 
 		if (userService.isDuplicatedUserEmail(signUpDTO.getUserEmail())) {
 			return ResultCode.builder()

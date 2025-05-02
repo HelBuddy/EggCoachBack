@@ -1,9 +1,5 @@
 package com.eggcoach.core.domain.account.dto;
 
-import java.time.LocalDateTime;
-
-import com.eggcoach.core.common.account.UserType;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SignUpDTO {
+public class SignUpDto {
 
 	// 이름
 	private String userName;
@@ -29,9 +25,6 @@ public class SignUpDTO {
 
 	// 성별
 	private String gender;
-
-	// 상태
-	private String status;
 
 	// 회원구분
 	private String userType;
@@ -59,4 +52,7 @@ public class SignUpDTO {
 
 	// 로그인 타입 (소셜여부)
 	private String socialProvider;
+
+	// 연령대
+	private Integer age;
 }

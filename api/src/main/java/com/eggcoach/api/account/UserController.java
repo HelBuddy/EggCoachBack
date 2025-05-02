@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eggcoach.api.account.service.AccountService;
 import com.eggcoach.core.common.response.JsonResponse;
 import com.eggcoach.core.common.response.ResultCode;
-import com.eggcoach.core.domain.account.dto.SignUpDTO;
+import com.eggcoach.core.domain.account.dto.SignUpDto;
 import com.eggcoach.core.domain.security.vo.CustomPrincipal;
 import com.eggcoach.core.security.interceptor.annotation.LoginUserCheck;
 import com.eggcoach.core.security.resolver.annotation.CurrentUserData;
@@ -44,7 +44,7 @@ public class UserController {
 		@ApiResponse(responseCode = "400", description = "가입에 실패 했습니다.")
 	})
 	@PostMapping("/signup")
-	public JsonResponse<Void> signup(@RequestBody SignUpDTO signUpDTO) throws Exception {
+	public JsonResponse<Void> signup(@RequestBody SignUpDto signUpDTO) throws Exception {
 		ResultCode resultCode = accountService.signUp(signUpDTO);
 
 		return JsonResponse.of(resultCode.getHttpStatus(), resultCode.getGetMessage());
