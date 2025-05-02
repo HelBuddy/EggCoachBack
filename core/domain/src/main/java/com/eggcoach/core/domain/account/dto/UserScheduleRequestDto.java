@@ -13,9 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserScheduleRequestDto {
 
-	// PK
-	private Long detail_seq;
-
 	// 회원 FK
 	private Long user_seq;
 

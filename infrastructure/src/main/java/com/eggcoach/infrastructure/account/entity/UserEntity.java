@@ -143,6 +143,7 @@ public class UserEntity {
 		this.address = signUpDTO.getAddress();
 		this.phoneNumber = signUpDTO.getPhoneNumber();
 		this.createAt = LocalDateTime.now();
+		this.updateAt = LocalDateTime.now();
 		this.weight = signUpDTO.getWeight();
 		this.muscle = signUpDTO.getMuscle();
 		this.bodyFat = signUpDTO.getBodyFat();

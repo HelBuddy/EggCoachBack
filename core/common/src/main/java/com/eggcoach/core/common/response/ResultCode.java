@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 public class ResultCode {
 	String httpStatus;
-	String getCode;
-	String getMessage;
+	String code;
+	String message;
 }

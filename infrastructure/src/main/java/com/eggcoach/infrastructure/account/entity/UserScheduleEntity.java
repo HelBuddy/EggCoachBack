@@ -78,7 +78,7 @@ public class UserScheduleEntity {
 			.build();
 	}
 
-	public void registerSchedule(Long userSeq, UserScheduleRequestDto userScheduleRequestDto) {
+	public UserScheduleEntity registerSchedule(Long userSeq, UserScheduleRequestDto userScheduleRequestDto) {
 		this.user_seq = userSeq;
 		this.pre_gender = userScheduleRequestDto.getPre_gender();
 		this.pre_adderss = userScheduleRequestDto.getPre_adderss();
@@ -89,6 +89,7 @@ public class UserScheduleEntity {
 		this.can_end_time = userScheduleRequestDto.getPre_end_time();
 		this.ground_seq = userScheduleRequestDto.getGround_seq();
 		this.lvl = userScheduleRequestDto.getLvl();
+		return this;
 	}
 
 }

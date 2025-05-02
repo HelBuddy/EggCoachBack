@@ -65,3 +65,10 @@ springdoc:
 #    path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+address:
+  frontserver: http://localhost:3000
+
+static:
+  path:
+    profile: /Users/a/WORKSPACE/imgTest/

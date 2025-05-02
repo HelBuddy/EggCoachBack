@@ -2,6 +2,8 @@ package com.eggcoach.infrastructure.security;
 
 import org.springframework.stereotype.Repository;
 
+import com.eggcoach.core.common.account.OAuthVendor;
+import com.eggcoach.core.common.account.UserType;
 import com.eggcoach.core.domain.account.model.User;
 import com.eggcoach.core.domain.account.dto.SignUpDto;
 import com.eggcoach.core.domain.security.adapter.UserPasswordPort;
@@ -29,7 +31,9 @@ public class UserServicePortImpl implements UserServicePort {
 	@Override
 	public User signUp(SignUpDto signUpDTO) {
 		UserEntity userEntity = new UserEntity().signUp(signUpDTO);
-		userEntity.encodePassword(userPasswordPort.encodedPassword(userEntity.getPassword()));
+		if (OAuthVendor.DEFAULT.getCode().equals(userEntity.getUserType().getCode())) {
+			userEntity.encodePassword(userPasswordPort.encodedPassword(userEntity.getPassword()));
+		}
 
 		return userRepository.save(userEntity).toUser();
 	}

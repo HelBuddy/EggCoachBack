@@ -3,14 +3,16 @@ package com.eggcoach.api.account;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.eggcoach.api.account.service.AccountService;
 import com.eggcoach.core.common.response.JsonResponse;
 import com.eggcoach.core.common.response.ResultCode;
 import com.eggcoach.core.domain.account.dto.SignUpDto;
+import com.eggcoach.core.domain.account.dto.UserScheduleRequestDto;
 import com.eggcoach.core.domain.security.vo.CustomPrincipal;
 import com.eggcoach.core.security.interceptor.annotation.LoginUserCheck;
 import com.eggcoach.core.security.resolver.annotation.CurrentUserData;
@@ -44,9 +46,13 @@ public class UserController {
 		@ApiResponse(responseCode = "400", description = "가입에 실패 했습니다.")
 	})
 	@PostMapping("/signup")
-	public JsonResponse<Void> signup(@RequestBody SignUpDto signUpDTO) throws Exception {
-		ResultCode resultCode = accountService.signUp(signUpDTO);
+	public JsonResponse<Void> signup(
+		@RequestPart("signUpDto") SignUpDto signUpDto,
+		@RequestPart("userScheduleRequestDto") UserScheduleRequestDto userScheduleRequestDto,
+		@RequestPart("image") MultipartFile profileImg
+	) throws Exception {
+		ResultCode resultCode = accountService.signUp(signUpDto, userScheduleRequestDto, profileImg);
 
-		return JsonResponse.of(resultCode.getHttpStatus(), resultCode.getGetMessage());
+		return JsonResponse.of(resultCode.getHttpStatus(), resultCode.getMessage());
 	}
 }

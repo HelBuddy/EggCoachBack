@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 public class SignUpDto {
 
 	// 이름
+	private Long userSeq;
+
+	// 이름
 	private String userName;
 
 	// 프로파일
@@ -55,4 +58,20 @@ public class SignUpDto {
 
 	// 연령대
 	private Integer age;
+
+	public void setProfileImg(String profile) {
+		this.profile = profile;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public void setUserSeq(Long userSeq) {
+		this.userSeq = userSeq;
+	}
+
+	public void setSocialProvider(String socialProvider) {
+		this.socialProvider = socialProvider;
+	}
 }
