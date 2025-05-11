@@ -6,7 +6,7 @@ import com.eggcoach.core.common.account.UserStatus;
 import com.eggcoach.core.common.account.OAuthVendor;
 import com.eggcoach.core.common.account.UserType;
 import com.eggcoach.core.domain.account.model.User;
-import com.eggcoach.core.domain.account.dto.SignUpDTO;
+import com.eggcoach.core.domain.account.dto.SignUpDto;
 import com.eggcoach.infrastructure.converter.account.OAuthVendorConverter;
 import com.eggcoach.infrastructure.converter.account.UserStatusConverter;
 import com.eggcoach.infrastructure.converter.account.UserTypeConverter;
@@ -104,7 +104,11 @@ public class UserEntity {
 	@Convert(converter = OAuthVendorConverter.class)
 	private OAuthVendor socialProvider;
 
-	public User user() {
+	// 연령대
+	@Column(name = "age")
+	private Integer age;
+
+	public User toUser() {
 		return User.builder()
 			.userSeq(userSeq)
 			.password(password)
@@ -124,10 +128,11 @@ public class UserEntity {
 			.bodyFat(bodyFat)
 			.height(height)
 			.socialProvider(socialProvider)
+			.age(age)
 			.build();
 	}
 
-	public UserEntity signUp(SignUpDTO signUpDTO) {
+	public UserEntity signUp(SignUpDto signUpDTO) {
 		this.userName = signUpDTO.getUserName();
 		this.userEmail = signUpDTO.getUserEmail();
 		this.password = signUpDTO.getPassword();
@@ -138,11 +143,13 @@ public class UserEntity {
 		this.address = signUpDTO.getAddress();
 		this.phoneNumber = signUpDTO.getPhoneNumber();
 		this.createAt = LocalDateTime.now();
+		this.updateAt = LocalDateTime.now();
 		this.weight = signUpDTO.getWeight();
 		this.muscle = signUpDTO.getMuscle();
 		this.bodyFat = signUpDTO.getBodyFat();
 		this.height = signUpDTO.getHeight();
 		this.socialProvider = signUpDTO.getSocialProvider() == null ? OAuthVendor.DEFAULT : OAuthVendor.fromCode(signUpDTO.getSocialProvider());
+		this.age = signUpDTO.getAge();
 		return this;
 	}
 

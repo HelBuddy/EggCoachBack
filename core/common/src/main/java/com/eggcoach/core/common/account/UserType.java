@@ -10,7 +10,7 @@ public enum UserType {
 	CUSTOMER("C", "일반회원"),
 	TRAINER("T", "트레이너"),
 	ADMIN("A", "관리자"),
-	SOCIAL("S", "소셜가입");
+	SOCIAL("S", "소셜가입후 기본정보 넣으면 C,T중 하나로 변경");
 
 	private final String code;
 

@@ -27,8 +27,11 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
 	private final SessionRegistry sessionRegistry;
 
-	public CustomOAuth2SuccessHandler(SessionRegistry sessionRegistry) {
+	private String frontServer;
+
+	public CustomOAuth2SuccessHandler(SessionRegistry sessionRegistry, String frontServer) {
 		this.sessionRegistry = sessionRegistry;
+		this.frontServer = frontServer;
 	}
 
 
@@ -47,12 +50,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 		CustomAuthConverter.from(authentication).setSecurityContext(token);
 		CustomAuthConverter.from(authentication).setSessionAttribute(request);
 
-		response.setContentType("application/json;charset=UTF-8");
-		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(
-			JsonResponse.of(String.valueOf(HttpServletResponse.SC_OK), AccountSuccessCode.LOGIN_SUCCESS_CODE.getMessage()));
-		response.getWriter().write(json);
-		response.flushBuffer();
+		response.sendRedirect(frontServer);
 	}
 
 

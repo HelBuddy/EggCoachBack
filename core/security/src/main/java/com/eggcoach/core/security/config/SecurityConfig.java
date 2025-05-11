@@ -1,6 +1,7 @@
 package com.eggcoach.core.security.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -33,6 +34,9 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 
 	private final CustomOAuth2UserService customOAuth2UserService;
+
+	@Value("${address.frontserver}")
+	private String frontServer;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http,
@@ -77,7 +81,7 @@ public class SecurityConfig {
 
 		http
 			.oauth2Login(oauth2 -> oauth2
-				.successHandler(new CustomOAuth2SuccessHandler(sessionRegistry))
+				.successHandler(new CustomOAuth2SuccessHandler(sessionRegistry, frontServer))
 				.userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
 					.userService(customOAuth2UserService))
 				.permitAll());

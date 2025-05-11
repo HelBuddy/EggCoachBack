@@ -69,4 +69,7 @@ public class User {
 
 	// 소셜로그인
 	private OAuthVendor socialProvider;
+
+	// 연령대
+	private Integer age;
 }

@@ -9,19 +9,13 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.eggcoach.core.common.account.AccountURI;
 import com.eggcoach.core.common.response.JsonResponse;
-import com.eggcoach.core.domain.account.dto.LoginRequestDTO;
-import com.eggcoach.core.domain.security.vo.CustomPrincipal;
-import com.eggcoach.core.security.converter.CustomAuthConverter;
-import com.eggcoach.core.security.model.PrincipalUser;
+import com.eggcoach.core.domain.account.dto.LoginRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.micrometer.common.util.StringUtils;
@@ -53,7 +47,7 @@ public class CustomUsernamePasswordAuthenticationFilter extends AbstractAuthenti
 			throw new AuthenticationServiceException("Content Type not supported");
 		}
 
-		LoginRequestDTO loginRequest = objectMapper.readValue(request.getInputStream(), LoginRequestDTO.class);
+		LoginRequestDto loginRequest = objectMapper.readValue(request.getInputStream(), LoginRequestDto.class);
 		if (StringUtils.isEmpty(loginRequest.getUserEmail()) || StringUtils.isEmpty(loginRequest.getPassword())) {
 			throw new AuthenticationServiceException("Username or Password not provided");
 		}
