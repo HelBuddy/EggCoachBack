@@ -58,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
 				.build();
 		}
 
-		if (!profileImg.isEmpty()) {
+		if (profileImg != null && !profileImg.isEmpty()) {
 			// 확장자 추출
 			String originalFilename = profileImg.getOriginalFilename();
 			// 기본 확장자

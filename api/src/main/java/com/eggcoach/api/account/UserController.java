@@ -49,7 +49,7 @@ public class UserController {
 	public JsonResponse<Void> signup(
 		@RequestPart("signUpDto") SignUpDto signUpDto,
 		@RequestPart("userScheduleRequestDto") UserScheduleRequestDto userScheduleRequestDto,
-		@RequestPart("image") MultipartFile profileImg
+		@RequestPart(value = "image", required = false) MultipartFile profileImg
 	) throws Exception {
 		ResultCode resultCode = accountService.signUp(signUpDto, userScheduleRequestDto, profileImg);
 
