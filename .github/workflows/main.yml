@@ -82,5 +82,6 @@ jobs:
               -e NAVER_CLIENT_SECRET=${{ secrets.NAVER_CLIENT_SECRET }} \
               -e NAVER_REDIRECT_URI=${{ secrets.NAVER_REDIRECT_URI }} \
               -e ALLOWED_ORIGINS=${{ secrets.ALLOWED_ORIGINS }} \
+              -e KAKAO_MAP_API_KEY=${{ secrets.KAKAO_MAP_API_KEY }} \
               ${{ secrets.DOCKER_USERNAME }}/eggcoachback:latest
           EOF
