@@ -69,6 +69,10 @@ springdoc:
 address:
   frontserver: http://localhost:3000
 
+external:
+  api:
+    kakaomap: ${KAKAO_MAP_API_KEY}
+
 static:
   path:
-    profile: /Users/a/WORKSPACE/imgTest/
+    profile:

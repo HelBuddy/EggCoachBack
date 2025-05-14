@@ -13,12 +13,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 })
 
 @EntityScan(basePackages = {
-	"com.eggcoach.infrastructure.account",  // Entity 클래스가 있는 패키지
-	"com.eggcoach.infrastructure.security"  // 다른 Entity 패키지들
+	"com.eggcoach.infrastructure"
 })
 
 @EnableJpaRepositories(
-	basePackages = "com.eggcoach.infrastructure.account"
+	basePackages = "com.eggcoach.infrastructure"
 )  // 리포지토리 위치 지정
 public class ApiApplication {
 
