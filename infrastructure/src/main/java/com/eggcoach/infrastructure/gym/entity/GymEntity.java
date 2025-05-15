@@ -1,12 +1,19 @@
 package com.eggcoach.infrastructure.gym.entity;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.eggcoach.core.domain.gym.dto.SignUpGymMakerDto;
+import com.eggcoach.infrastructure.brigde.entity.TrainerGymEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
@@ -48,6 +55,19 @@ public class GymEntity {
 	@Column(name = "depth3")
 	private String depth3;
 
+	// 생성 날짜
+	@Column(name = "create_at")
+	private LocalDateTime createAt;
+
+	// 수정 날짜
+	@Column(name = "update_at")
+	private LocalDateTime updateAt;
+
+	// 헬스회원 일대다
+	@OneToMany(mappedBy = "trainerGymSeq", fetch = FetchType.LAZY)
+	private List<TrainerGymEntity> trainerGymEntities = new ArrayList<>();
+
+
 	public GymEntity signupGymMarker(SignUpGymMakerDto signUpGymMakerDto) {
 		this.gym_name = signUpGymMakerDto.getGymName();
 		this.address = signUpGymMakerDto.getAddress();
@@ -56,7 +76,13 @@ public class GymEntity {
 		this.depth1 = signUpGymMakerDto.getDepth1();
 		this.depth2 = signUpGymMakerDto.getDepth2();
 		this.depth3 = signUpGymMakerDto.getDepth3();
+		this.createAt = LocalDateTime.now();
+		this.updateAt = LocalDateTime.now();
 
 		return this;
+	}
+
+	public void addGym(TrainerGymEntity trainerGymEntity) {
+		this.trainerGymEntities.add(trainerGymEntity);
 	}
 }

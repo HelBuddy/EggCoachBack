@@ -1,12 +1,15 @@
 package com.eggcoach.infrastructure.account.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.eggcoach.core.common.account.UserStatus;
 import com.eggcoach.core.common.account.OAuthVendor;
 import com.eggcoach.core.common.account.UserType;
 import com.eggcoach.core.domain.account.model.User;
 import com.eggcoach.core.domain.account.dto.SignUpDto;
+import com.eggcoach.infrastructure.brigde.entity.TrainerGymEntity;
 import com.eggcoach.infrastructure.converter.account.OAuthVendorConverter;
 import com.eggcoach.infrastructure.converter.account.UserStatusConverter;
 import com.eggcoach.infrastructure.converter.account.UserTypeConverter;
@@ -14,9 +17,11 @@ import com.eggcoach.infrastructure.converter.account.UserTypeConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
@@ -108,6 +113,11 @@ public class UserEntity {
 	@Column(name = "age")
 	private Integer age;
 
+	// 헬스장 일대다
+	@OneToMany(mappedBy = "trainerGymSeq", fetch = FetchType.LAZY)
+	private List<TrainerGymEntity> trainerGymEntities = new ArrayList<>();
+
+
 	public User toUser() {
 		return User.builder()
 			.userSeq(userSeq)
@@ -156,6 +166,10 @@ public class UserEntity {
 
 	public void encodePassword(String password) {
 		this.password = password;
+	}
+
+	public void addGym(TrainerGymEntity trainerGymEntity) {
+		this.trainerGymEntities.add(trainerGymEntity);
 	}
 
 }

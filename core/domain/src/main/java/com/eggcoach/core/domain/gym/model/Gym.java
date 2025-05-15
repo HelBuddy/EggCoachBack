@@ -1,5 +1,7 @@
 package com.eggcoach.core.domain.gym.model;
 
+import java.time.LocalDateTime;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -30,5 +32,11 @@ public class Gym {
 
 	// 동
 	private String depth3;
+
+	// 생성 날짜
+	private LocalDateTime createAt;
+
+	// 수정 날짜
+	private LocalDateTime updateAt;
 
 }

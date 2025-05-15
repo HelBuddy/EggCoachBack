@@ -1,5 +1,10 @@
 package com.eggcoach.core.domain.gym.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.eggcoach.core.domain.account.dto.UserGymDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,4 +39,7 @@ public class GymMarkerDto {
 
 	// 동
 	private String depth3;
+
+	// 헬스장에 연결된 트레이너
+	private List<UserGymDto> userGymDto = new ArrayList<>();
 }
