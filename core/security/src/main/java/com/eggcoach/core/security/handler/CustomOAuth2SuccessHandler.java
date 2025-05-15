@@ -50,7 +50,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 		CustomAuthConverter.from(authentication).setSecurityContext(token);
 		CustomAuthConverter.from(authentication).setSessionAttribute(request);
 
-		response.sendRedirect(frontServer);
+		response.sendRedirect(frontServer + "/signup/oauth");
 	}
 
 

@@ -72,4 +72,7 @@ public class User {
 
 	// 연령대
 	private Integer age;
+
+	// 어필
+	private String appeal;
 }

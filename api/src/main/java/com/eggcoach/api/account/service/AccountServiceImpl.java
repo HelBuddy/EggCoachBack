@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
 	public ResultCode signUp(SignUpDto signUpDTO, UserScheduleRequestDto userScheduleRequestDto
 		, MultipartFile profileImg) throws IOException {
 
-		if (!UserType.SOCIAL.getCode().equals(signUpDTO.getUserType()) && userService.isDuplicatedUserEmail(
+		if (userService.isDuplicatedUserEmail(
 			signUpDTO.getUserEmail())) {
 			return ResultCode.builder()
 				.httpStatus(String.valueOf(HttpStatus.BAD_REQUEST.value()))

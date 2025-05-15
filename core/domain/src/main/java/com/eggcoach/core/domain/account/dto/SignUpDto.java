@@ -59,6 +59,9 @@ public class SignUpDto {
 	// 연령대
 	private Integer age;
 
+	// 어필
+	private String appeal;
+
 	public void setProfileImg(String profile) {
 		this.profile = profile;
 	}
