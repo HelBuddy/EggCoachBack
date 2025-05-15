@@ -1,6 +1,7 @@
 package com.eggcoach.infrastructure.gym.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,9 @@ public class GymService {
 
 	public List<GymEntity> getAllGymBounds(Double minX, Double maxX, Double minY, Double maxY) {
 		return gymRepository.findAllByBounds(minX, maxX, minY, maxY);
+	}
+
+	public Optional<GymEntity> getGymEntityById(Long id) {
+		return gymRepository.findById(id);
 	}
 }

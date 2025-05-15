@@ -31,7 +31,7 @@ public class UserServicePortImpl implements UserServicePort {
 	@Override
 	public User signUp(SignUpDto signUpDTO) {
 		UserEntity userEntity = new UserEntity().signUp(signUpDTO);
-		if (OAuthVendor.DEFAULT.getCode().equals(userEntity.getUserType().getCode())) {
+		if (OAuthVendor.DEFAULT.getCode().equals(userEntity.getSocialProvider().getCode())) {
 			userEntity.encodePassword(userPasswordPort.encodedPassword(userEntity.getPassword()));
 		}
 

@@ -1,8 +1,6 @@
 package com.eggcoach.api.gym;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +16,9 @@ import com.eggcoach.core.common.response.JsonResponse;
 import com.eggcoach.core.common.response.ResultCode;
 import com.eggcoach.core.domain.gym.dto.GymMarkerDto;
 import com.eggcoach.core.domain.gym.dto.SignUpGymMakerDto;
+import com.eggcoach.core.domain.security.vo.CustomPrincipal;
+import com.eggcoach.core.security.interceptor.annotation.LoginUserCheck;
+import com.eggcoach.core.security.resolver.annotation.CurrentUserData;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -38,6 +39,7 @@ public class GymController {
 		@ApiResponse(responseCode = "200", description = "헬스장 정보 로드에 성공 했습니다."),
 		@ApiResponse(responseCode = "400", description = "헬스장 정보 로드에 실패 했습니다.")
 	})
+
 	@GetMapping("/getAllGymBounds")
 	public JsonResponse<List<GymMarkerDto>> getAllGymBounds(
 		@RequestParam Double minX,
@@ -59,14 +61,24 @@ public class GymController {
 	@PostMapping("/signupGym")
 	public JsonResponse<Void> signupGym(@RequestBody SignUpGymMakerDto signUpGymMakerDto) {
 
-		gymService.registerGym(signUpGymMakerDto);
+		ResultCode resultCode = gymService.registerGym(signUpGymMakerDto);
 
-		ResultCode build = ResultCode.builder()
-			.httpStatus(String.valueOf(HttpStatus.OK.value()))
-			.code(AccountSuccessCode.SIGNUP_SUCCESS_CODE.getCode())
-			.message(AccountSuccessCode.SIGNUP_SUCCESS_CODE.getMessage())
-			.build();
+		return JsonResponse.of(resultCode.getHttpStatus(), resultCode.getMessage());
+	}
 
-		return JsonResponse.of(build.getHttpStatus(), build.getMessage());
+	@Operation(summary = "헬스장에 트레이너 등록", description = "트레이너를 헬스장에 등록합니다.")
+	@ApiResponses({
+		@ApiResponse(responseCode = "200", description = "정보 등록에 성공 했습니다."),
+		@ApiResponse(responseCode = "400", description = "정보 등록에 실패 했습니다.")
+	})
+	@LoginUserCheck
+	@PostMapping("/assignTrainerAtGym")
+	public JsonResponse<Void> setTrainerAtGym(
+		@CurrentUserData CustomPrincipal customPrincipal,
+		@RequestBody GymMarkerDto gymMarkerDto) {
+
+		ResultCode resultCode = gymService.setTrainerAtGym(customPrincipal, gymMarkerDto);
+
+		return JsonResponse.of(resultCode.getCode(), resultCode.getMessage());
 	}
 }
