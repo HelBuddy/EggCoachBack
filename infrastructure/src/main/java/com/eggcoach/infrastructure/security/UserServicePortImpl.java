@@ -33,6 +33,9 @@ public class UserServicePortImpl implements UserServicePort {
 		UserEntity userEntity = new UserEntity().signUp(signUpDTO);
 		if (OAuthVendor.DEFAULT.getCode().equals(userEntity.getSocialProvider().getCode())) {
 			userEntity.encodePassword(userPasswordPort.encodedPassword(userEntity.getPassword()));
+		} else {
+			UserEntity oauthUser = userRepository.findByUserEmail(signUpDTO.getUserEmail()).orElseThrow();
+			oauthUser.oauthSignUp(signUpDTO);
 		}
 
 		return userRepository.save(userEntity).toUser();

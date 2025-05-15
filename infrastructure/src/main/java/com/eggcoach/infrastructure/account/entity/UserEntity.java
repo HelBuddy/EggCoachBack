@@ -113,6 +113,10 @@ public class UserEntity {
 	@Column(name = "age")
 	private Integer age;
 
+	// 어필
+	@Column(name = "appeal")
+	private String appeal;
+
 	// 헬스장 일대다
 	@OneToMany(mappedBy = "trainerGymSeq", fetch = FetchType.LAZY)
 	private List<TrainerGymEntity> trainerGymEntities = new ArrayList<>();
@@ -139,6 +143,7 @@ public class UserEntity {
 			.height(height)
 			.socialProvider(socialProvider)
 			.age(age)
+			.appeal(appeal)
 			.build();
 	}
 
@@ -160,6 +165,22 @@ public class UserEntity {
 		this.height = signUpDTO.getHeight();
 		this.socialProvider = signUpDTO.getSocialProvider() == null ? OAuthVendor.DEFAULT : OAuthVendor.fromCode(signUpDTO.getSocialProvider());
 		this.age = signUpDTO.getAge();
+		this.appeal = signUpDTO.getAppeal();
+		return this;
+	}
+
+	public UserEntity oauthSignUp(SignUpDto signUpDTO) {
+		this.gender = signUpDTO.getGender();
+		this.userType = UserType.fromCode(signUpDTO.getUserType());
+		this.nickName = signUpDTO.getNickName();
+		this.address = signUpDTO.getAddress();
+		this.phoneNumber = signUpDTO.getPhoneNumber();
+		this.weight = signUpDTO.getWeight();
+		this.muscle = signUpDTO.getMuscle();
+		this.bodyFat = signUpDTO.getBodyFat();
+		this.height = signUpDTO.getHeight();
+		this.age = signUpDTO.getAge();
+		this.appeal = signUpDTO.getAppeal();
 		return this;
 	}
 
