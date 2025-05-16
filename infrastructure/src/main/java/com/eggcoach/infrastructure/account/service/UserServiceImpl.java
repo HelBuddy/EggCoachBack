@@ -26,4 +26,10 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUserEmail(email);
 	}
 
+	public Optional<UserEntity> getUserEntityByUserId(Long userSeq) {
+
+		return userRepository.findByUserSeq(userSeq);
+	}
+
+
 }

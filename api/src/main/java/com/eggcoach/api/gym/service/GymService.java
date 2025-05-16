@@ -12,7 +12,7 @@ public interface GymService {
 
 	ResultCode registerGym(SignUpGymMakerDto signUpGymMakerDto);
 
-	List<GymMarkerDto> getAllGymBounds(Double minX, Double maxX, Double minY, Double maxY);
+	List<GymMarkerDto> getAllGymBounds(Double minX, Double maxX, Double minY, Double maxY, CustomPrincipal customPrincipal);
 
 	ResultCode setTrainerAtGym(CustomPrincipal customPrincipal, GymMarkerDto gymMarkerDto);
 }

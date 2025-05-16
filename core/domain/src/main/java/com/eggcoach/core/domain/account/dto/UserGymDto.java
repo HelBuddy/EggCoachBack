@@ -20,4 +20,10 @@ public class UserGymDto {
 
 	// 연령대
 	private Integer age;
+
+	// 평점
+	private Double avgRating;
+
+	// 좋아요 여부
+	private String like;
 }
