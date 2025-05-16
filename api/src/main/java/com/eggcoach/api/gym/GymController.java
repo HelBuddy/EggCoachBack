@@ -45,9 +45,10 @@ public class GymController {
 		@RequestParam Double minX,
 		@RequestParam Double minY,
 		@RequestParam Double maxX,
-		@RequestParam Double maxY
+		@RequestParam Double maxY,
+		@CurrentUserData CustomPrincipal customPrincipal
 	) {
-		List<GymMarkerDto> allGymBounds = gymService.getAllGymBounds(minX, maxX, minY, maxY);
+		List<GymMarkerDto> allGymBounds = gymService.getAllGymBounds(minX, maxX, minY, maxY, customPrincipal);
 
 		return JsonResponse.of(
 			String.valueOf(HttpStatus.OK), GymSuccessCode.GET_BOUNDS_LIST_SUCCESS_CODE.getCode(), allGymBounds);

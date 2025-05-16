@@ -10,6 +10,7 @@ import com.eggcoach.core.common.account.UserType;
 import com.eggcoach.core.domain.account.model.User;
 import com.eggcoach.core.domain.account.dto.SignUpDto;
 import com.eggcoach.infrastructure.brigde.entity.TrainerGymEntity;
+import com.eggcoach.infrastructure.brigde.entity.TrainerUserReviewEntity;
 import com.eggcoach.infrastructure.converter.account.OAuthVendorConverter;
 import com.eggcoach.infrastructure.converter.account.UserStatusConverter;
 import com.eggcoach.infrastructure.converter.account.UserTypeConverter;
@@ -121,6 +122,12 @@ public class UserEntity {
 	@OneToMany(mappedBy = "trainerGymSeq", fetch = FetchType.LAZY)
 	private List<TrainerGymEntity> trainerGymEntities = new ArrayList<>();
 
+	// 리뷰/평점 일대다
+	@OneToMany(mappedBy = "trainerUserReviewSeq", fetch = FetchType.LAZY)
+	private List<TrainerUserReviewEntity> trainerReviewEntities = new ArrayList<>();
+
+	@OneToMany(mappedBy = "trainerUserReviewSeq", fetch = FetchType.LAZY)
+	private List<TrainerUserReviewEntity> userReviewEntities = new ArrayList<>();
 
 	public User toUser() {
 		return User.builder()
@@ -191,6 +198,14 @@ public class UserEntity {
 
 	public void addGym(TrainerGymEntity trainerGymEntity) {
 		this.trainerGymEntities.add(trainerGymEntity);
+	}
+
+	public void addTrainerReview(TrainerUserReviewEntity trainerUserReviewEntity) {
+		this.trainerReviewEntities.add(trainerUserReviewEntity);
+	}
+
+	public void addUserReview(TrainerUserReviewEntity trainerUserReviewEntity) {
+		this.trainerReviewEntities.add(trainerUserReviewEntity);
 	}
 
 }

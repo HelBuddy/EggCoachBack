@@ -1,6 +1,7 @@
 package com.eggcoach.core.security.resolver;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -23,8 +24,9 @@ public class CurrentUserDataArgResolver implements HandlerMethodArgumentResolver
 
 		Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
 
-		return (CustomPrincipal)loggedInUser.getPrincipal();
-
+		return loggedInUser instanceof AnonymousAuthenticationToken ?
+			new CustomPrincipal("ANONYMOUSE","ANONYMOUSE","ANONYMOUSE","ANONYMOUSE") :
+			(CustomPrincipal)loggedInUser.getPrincipal();
 	}
 
 	@Override

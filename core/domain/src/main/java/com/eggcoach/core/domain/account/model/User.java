@@ -1,6 +1,7 @@
 package com.eggcoach.core.domain.account.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.eggcoach.core.common.account.OAuthVendor;
 import com.eggcoach.core.common.account.UserStatus;
@@ -75,4 +76,7 @@ public class User {
 
 	// 어필
 	private String appeal;
+
+	// 리뷰/평점
+	private List<Review> reviews;
 }
