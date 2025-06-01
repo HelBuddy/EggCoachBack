@@ -24,7 +24,7 @@ public class UserScheduleEntity {
 
 	// 회원 FK
 	@Column(name = "user_seq")
-	private Long user_seq;
+	private Long userSeq;
 
 	// 선호 성별(회원일 시)
 	@Column(name = "pre_gender")
@@ -65,7 +65,7 @@ public class UserScheduleEntity {
 	public UserSchedule toUserSchedule() {
 		return UserSchedule.builder()
 			.detail_seq(detail_seq)
-			.user_seq(user_seq)
+			.user_seq(userSeq)
 			.pre_gender(pre_gender)
 			.pre_adderss(pre_adderss)
 			.pre_start_time(pre_start_time)
@@ -79,7 +79,7 @@ public class UserScheduleEntity {
 	}
 
 	public UserScheduleEntity registerSchedule(Long userSeq, UserScheduleRequestDto userScheduleRequestDto) {
-		this.user_seq = userSeq;
+		this.userSeq = userSeq;
 		this.pre_gender = userScheduleRequestDto.getPre_gender();
 		this.pre_adderss = userScheduleRequestDto.getPre_adderss();
 		this.appeal = userScheduleRequestDto.getAppeal();
