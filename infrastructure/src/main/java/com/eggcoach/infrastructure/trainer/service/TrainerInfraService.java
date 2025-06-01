@@ -32,7 +32,7 @@ public class TrainerInfraService {
 	}
 
 	public List<TrainerScheduleDto> getAllTrainerSchedules(Long trainerId) {
-		return userScheduleRepository.findByUser_seq(trainerId).stream().map(item ->
+		return userScheduleRepository.findByUserSeq(trainerId).stream().map(item ->
 			new TrainerScheduleDto(item.getAppeal(), item.getCan_start_time(),
 				item.getCan_end_time(),
 				item.getGround_seq(), item.getLvl())

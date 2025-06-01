@@ -8,5 +8,5 @@ import com.eggcoach.infrastructure.account.entity.UserScheduleEntity;
 
 public interface UserScheduleRepository extends JpaRepository<UserScheduleEntity, Long> {
 
-	List<UserScheduleEntity> findByUser_seq(Long userId);
+	List<UserScheduleEntity> findByUserSeq(Long userSeq);
 }
