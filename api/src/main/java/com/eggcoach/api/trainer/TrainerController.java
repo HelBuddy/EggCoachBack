@@ -16,6 +16,7 @@ import com.eggcoach.core.common.response.JsonResponse;
 import com.eggcoach.core.domain.bridge.dto.RegisterReviewDto;
 import com.eggcoach.core.domain.bridge.dto.TrainerUserReviewDto;
 import com.eggcoach.core.domain.security.vo.CustomPrincipal;
+import com.eggcoach.core.domain.trainer.dto.TrainerDetailDto;
 import com.eggcoach.core.domain.trainer.dto.TrainerQnaViewDto;
 import com.eggcoach.core.security.interceptor.annotation.LoginUserCheck;
 import com.eggcoach.core.security.resolver.annotation.CurrentUserData;
@@ -57,11 +58,26 @@ public class TrainerController {
 		@ApiResponse(responseCode = "200", description = "성공적으로 조회되었습니다."),
 		@ApiResponse(responseCode = "400", description = "조회에 실패했습니다.")
 	})
-	@GetMapping("/trainer/getAllTrainerQna")
+	@GetMapping("/getAllTrainerQna")
 	public JsonResponse<List<TrainerQnaEntity>> getAllTrainerQna(@RequestParam Long trainerId) {
 
 		List<TrainerQnaEntity> allTrainerQna = trainerService.getAllTrainerQna(trainerId);
 
 		return JsonResponse.of(String.valueOf(HttpStatus.OK.value()), CommonCode.COMMON_SUCCESS_CODE.getMessage(), allTrainerQna);
+	}
+
+	@Operation(summary = "트레이너 상세 정보를 가져옵니다.", description = "트레이너 상세 정보를 가져옵니다.")
+	@ApiResponses({
+		@ApiResponse(responseCode = "200", description = "성공적으로 조회되었습니다."),
+		@ApiResponse(responseCode = "400", description = "조회에 실패했습니다.")
+	})
+	@GetMapping("/getDetail")
+	public JsonResponse<TrainerDetailDto> getTrainerDetail(
+		@RequestParam Long trainerId,
+		@CurrentUserData CustomPrincipal customPrincipal) {
+
+		TrainerDetailDto trainerDetail = trainerService.getTrainerDetail(trainerId, customPrincipal);
+
+		return JsonResponse.of(String.valueOf(HttpStatus.OK.value()), CommonCode.COMMON_SUCCESS_CODE.getMessage(), trainerDetail);
 	}
 }

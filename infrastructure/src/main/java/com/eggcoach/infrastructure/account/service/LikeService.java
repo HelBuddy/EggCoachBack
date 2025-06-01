@@ -34,4 +34,8 @@ public class LikeService {
 			likeRepository.delete(likeEntity.get());
 		}
 	}
+
+	public boolean existsByUserEntity_UserSeqAndTrainerId(Long userSeq, Long trainerId) {
+		return likeRepository.existsByUserEntity_UserSeqAndTrainerId(userSeq, trainerId);
+	}
 }

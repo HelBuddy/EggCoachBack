@@ -12,4 +12,6 @@ public interface LikeRepository extends JpaRepository<LikeEntity, Long> {
 	List<LikeEntity> findAllByUserEntity_UserSeq(Long userId);
 
 	Optional<LikeEntity> findByTrainerId(Long trainerId);
+
+	boolean existsByUserEntity_UserSeqAndTrainerId(Long userSeq, Long trainerId);
 }
